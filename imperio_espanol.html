@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Imperio Español — Historia y Legado</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dark: #8B6914;
+    --crimson: #8B1A1A;
+    --crimson-light: #B22222;
+    --parchment: #F5EDD8;
+    --parchment-dark: #E8D9B8;
+    --ink: #1A1208;
+    --ink-light: #2E2010;
+    --stone: #6B5E4A;
+    --stone-light: #9A8E7A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--parchment);
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.3;
+  }
+
+  /* NAVIGATION */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(26,18,8,0.92);
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s;
+  }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--stone-light);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(139,26,26,0.15) 0%, transparent 50%),
+      var(--ink);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--ink));
+  }
+
+  .hero-ornament {
+    font-size: 1.2rem;
+    color: var(--gold);
+    letter-spacing: 0.5em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+    font-family: 'Cinzel', serif;
+  }
+
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: clamp(2.8rem, 8vw, 6.5rem);
+    line-height: 1;
+    color: var(--parchment);
+    margin-bottom: 0.3em;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.4s forwards;
+    text-shadow: 0 0 80px rgba(201,168,76,0.3);
+  }
+
+  .hero h1 span {
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--stone-light);
+    max-width: 700px;
+    margin: 1.5rem auto 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero-dates {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: var(--gold-dark);
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.2s forwards;
+    z-index: 2;
+  }
+
+  .hero-scroll span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--stone-light);
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* STATS BAND */
+  .stats-band {
+    background: var(--crimson);
+    border-top: 1px solid rgba(201,168,76,0.4);
+    border-bottom: 1px solid rgba(201,168,76,0.4);
+    padding: 3rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 1.5rem 2rem;
+    border-right: 1px solid rgba(201,168,76,0.2);
+    position: relative;
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: 'Cinzel', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: rgba(245,237,216,0.7);
+    margin-top: 0.4rem;
+    display: block;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::before, .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dark));
+  }
+
+  .section-label::after {
+    background: linear-gradient(to left, transparent, var(--gold-dark));
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--parchment);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  h2 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .lead-text {
+    font-size: 1.2rem;
+    color: var(--stone-light);
+    font-style: italic;
+    max-width: 750px;
+    margin-bottom: 2rem;
+    border-left: 3px solid var(--gold-dark);
+    padding-left: 1.5rem;
+  }
+
+  p {
+    color: rgba(245,237,216,0.82);
+    margin-bottom: 1.2rem;
+    max-width: 720px;
+  }
+
+  /* TIMELINE */
+  #cronologia { padding: 6rem 0; }
+  
+  .timeline-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .timeline {
+    position: relative;
+    margin-top: 4rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold-dark) 10%, var(--gold-dark) 90%, transparent);
+    transform: translateX(-50%);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0 2rem;
+    margin-bottom: 5rem;
+    align-items: start;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .timeline-item:nth-child(odd) .timeline-content { grid-column: 1; text-align: right; }
+  .timeline-item:nth-child(odd) .timeline-empty { grid-column: 3; }
+  .timeline-item:nth-child(even) .timeline-content { grid-column: 3; text-align: left; }
+  .timeline-item:nth-child(even) .timeline-empty { grid-column: 1; }
+
+  .timeline-node {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.3rem;
+  }
+
+  .timeline-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--ink);
+    box-shadow: 0 0 0 3px var(--gold-dark);
+    flex-shrink: 0;
+  }
+
+  .timeline-year {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    opacity: 0.7;
+  }
+
+  .timeline-content {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 1.5rem 2rem;
+    position: relative;
+  }
+
+  .timeline-content:hover {
+    background: rgba(201,168,76,0.06);
+    border-color: rgba(201,168,76,0.3);
+    transition: all 0.3s;
+  }
+
+  .timeline-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--parchment);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.95rem;
+    color: var(--stone-light);
+    margin: 0;
+    max-width: none;
+  }
+
+  .timeline-tag {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    padding: 0.2rem 0.6rem;
+    background: rgba(139,26,26,0.3);
+    border: 1px solid rgba(139,26,26,0.5);
+    color: #E08080;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  .tag-expansion { background: rgba(26,70,26,0.3); border-color: rgba(26,100,26,0.5); color: #80E080; }
+  .tag-culture { background: rgba(50,30,80,0.3); border-color: rgba(80,50,130,0.5); color: #C0A0E0; }
+  .tag-crisis { background: rgba(100,60,10,0.3); border-color: rgba(150,90,20,0.5); color: #E0B870; }
+  .tag-decline { background: rgba(60,20,20,0.3); border-color: rgba(100,30,30,0.5); color: #D07070; }
+
+  /* TERRITORIES MAP */
+  #territorios {
+    background:
+      radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
+      rgba(255,255,255,0.01);
+    border-top: 1px solid rgba(201,168,76,0.1);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    max-width: none;
+    padding: 6rem 2rem;
+  }
+
+  .territories-inner { max-width: 1200px; margin: 0 auto; }
+
+  .territories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .territory-card {
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 2rem;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .territory-card:hover {
+    background: rgba(201,168,76,0.07);
+    border-color: rgba(201,168,76,0.5);
+    transform: translateY(-3px);
+  }
+
+  .territory-card.active {
+    background: rgba(201,168,76,0.1);
+    border-color: var(--gold);
+  }
+
+  .territory-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .territory-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .territory-card p {
+    font-size: 0.9rem;
+    color: var(--stone-light);
+    margin: 0;
+    max-width: none;
+  }
+
+  .territory-detail {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(201,168,76,0.2);
+    font-size: 0.88rem;
+    color: rgba(245,237,216,0.7);
+  }
+
+  .territory-card.active .territory-detail { display: block; }
+
+  /* MONARCHS */
+  .monarchs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .monarch-card {
+    border: 1px solid rgba(201,168,76,0.15);
+    background: rgba(255,255,255,0.02);
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .monarch-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold-dark);
+    transition: background 0.3s;
+  }
+
+  .monarch-card:hover { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.05); }
+  .monarch-card:hover::before { background: var(--gold); }
+
+  .monarch-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--parchment);
+    margin-bottom: 0.2rem;
+  }
+
+  .monarch-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .monarch-dates {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: var(--stone-light);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .monarch-desc {
+    font-size: 0.95rem;
+    color: rgba(245,237,216,0.7);
+    margin: 0;
+    max-width: none;
+  }
+
+  /* LEGACY / DEBATES */
+  .debate-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .debate-col h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid;
+  }
+
+  .debate-col.positive h3 { color: #6DBF6D; border-color: rgba(109,191,109,0.3); }
+  .debate-col.negative h3 { color: #E07070; border-color: rgba(224,112,112,0.3); }
+  .debate-col.neutral h3 { color: var(--gold-light); border-color: rgba(201,168,76,0.3); }
+
+  .debate-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .debate-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .debate-item p {
+    font-size: 0.95rem;
+    color: rgba(245,237,216,0.75);
+    margin: 0;
+    max-width: none;
+  }
+
+  /* QUIZ */
+  #quiz { padding: 6rem 2rem; max-width: 800px; margin: 0 auto; }
+
+  .quiz-question {
+    display: none;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .quiz-question.active { display: block; }
+
+  .quiz-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--parchment);
+    margin-bottom: 2rem;
+    line-height: 1.4;
+  }
+
+  .quiz-options {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .quiz-option {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: var(--parchment);
+    text-align: left;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .quiz-option:hover:not(:disabled) {
+    background: rgba(201,168,76,0.1);
+    border-color: rgba(201,168,76,0.5);
+  }
+
+  .quiz-option.correct {
+    background: rgba(60,120,60,0.3);
+    border-color: rgba(100,180,100,0.6);
+    color: #A0E0A0;
+  }
+
+  .quiz-option.incorrect {
+    background: rgba(120,40,40,0.3);
+    border-color: rgba(180,80,80,0.6);
+    color: #E0A0A0;
+  }
+
+  .quiz-option:disabled { cursor: default; }
+
+  .quiz-feedback {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--stone-light);
+    border-left: 3px solid var(--gold-dark);
+    display: none;
+  }
+
+  .quiz-feedback.visible { display: block; }
+
+  .quiz-btn {
+    margin-top: 2rem;
+    padding: 0.8rem 2.5rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: none;
+  }
+
+  .quiz-btn:hover { background: rgba(201,168,76,0.15); }
+  .quiz-btn.visible { display: inline-block; }
+
+  .quiz-progress {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .quiz-prog-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.2);
+    transition: background 0.3s;
+  }
+
+  .quiz-prog-dot.done { background: var(--gold); }
+  .quiz-prog-dot.active { background: var(--gold-light); box-shadow: 0 0 8px var(--gold-light); }
+
+  .quiz-score {
+    text-align: center;
+    display: none;
+    padding: 3rem;
+    border: 1px solid rgba(201,168,76,0.3);
+    background: rgba(201,168,76,0.05);
+  }
+
+  .quiz-score.visible { display: block; }
+
+  .quiz-score-number {
+    font-family: 'Cinzel', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .quiz-score p {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--stone-light);
+    max-width: none;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(201,168,76,0.2);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--gold-dark);
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+  }
+
+  footer p {
+    font-size: 0.85rem;
+    color: var(--stone);
+    font-style: italic;
+    max-width: none;
+    margin-bottom: 0.4rem;
+  }
+
+  /* DIVIDER */
+  .ornamental-divider {
+    text-align: center;
+    color: var(--gold-dark);
+    font-size: 1.2rem;
+    margin: 2rem 0;
+    letter-spacing: 0.5em;
+    opacity: 0.6;
+  }
+
+  /* QUOTE BLOCK */
+  .blockquote {
+    border-left: 3px solid var(--gold-dark);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    background: rgba(201,168,76,0.04);
+    position: relative;
+  }
+
+  .blockquote::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--gold-dark);
+    opacity: 0.3;
+    position: absolute;
+    top: -1rem;
+    left: 1rem;
+    line-height: 1;
+  }
+
+  .blockquote p {
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--parchment);
+    max-width: none;
+    margin: 0 0 0.5rem;
+  }
+
+  .blockquote cite {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+  }
+
+  /* ACCORDION */
+  .accordion {
+    margin-top: 2rem;
+  }
+
+  .accordion-item {
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .accordion-header {
+    padding: 1.2rem 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--parchment);
+    transition: color 0.2s;
+    user-select: none;
+  }
+
+  .accordion-header:hover { color: var(--gold-light); }
+
+  .accordion-icon {
+    color: var(--gold);
+    font-size: 1.4rem;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .accordion-item.open .accordion-icon { transform: rotate(45deg); }
+
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .accordion-item.open .accordion-body { max-height: 1000px; }
+
+  .accordion-body p {
+    padding-bottom: 1.5rem;
+    font-size: 0.97rem;
+    color: rgba(245,237,216,0.75);
+    max-width: none;
+  }
+
+  /* FULL WIDTH SECTION */
+  .full-section {
+    background: linear-gradient(135deg, rgba(139,26,26,0.15) 0%, transparent 50%),
+                rgba(255,255,255,0.015);
+    border-top: 1px solid rgba(201,168,76,0.1);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    padding: 6rem 2rem;
+    max-width: none;
+    margin: 0;
+  }
+
+  .full-section-inner { max-width: 1200px; margin: 0 auto; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.6); opacity: 0.4; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    
+    .timeline::before { left: 1rem; }
+    .timeline-item {
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto;
+    }
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+      grid-column: 2;
+      grid-row: 1;
+      text-align: left;
+    }
+    .timeline-node { grid-column: 1; grid-row: 1; }
+    .timeline-empty { display: none; }
+    .timeline-year { writing-mode: horizontal-tb; transform: none; }
+
+    .debate-section { grid-template-columns: 1fr; }
+    .stats-band { grid-template-columns: 1fr 1fr; }
+    .stat-item { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.2); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Imperio Español</div>
+  <ul class="nav-links">
+    <li><a href="#origenes">Orígenes</a></li>
+    <li><a href="#cronologia">Cronología</a></li>
+    <li><a href="#territorios">Territorios</a></li>
+    <li><a href="#monarcas">Monarcas</a></li>
+    <li><a href="#legado">Legado</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-ornament">✦ Historia Universal ✦</div>
+  <h1>El Imperio<span>Español</span></h1>
+  <p class="hero-subtitle">El mayor imperio territorial de la historia moderna — su ascenso, su esplendor y su inevitable declive</p>
+  <div class="hero-dates">1492 — 1898</div>
+  <div class="hero-scroll">
+    <span>Explorar</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stat-item">
+    <span class="stat-number">20M</span>
+    <span class="stat-label">km² en su apogeo (s. XVII)</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">400</span>
+    <span class="stat-label">años de presencia global</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">35+</span>
+    <span class="stat-label">territorios en cuatro continentes</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">500M</span>
+    <span class="stat-label">hispanohablantes en el mundo hoy</span>
+  </div>
+</div>
+
+<!-- ORÍGENES -->
+<section id="origenes">
+  <div class="section-label">I. Los Fundamentos</div>
+  <h2>Orígenes del <em>Imperio</em></h2>
+  <p class="lead-text">La España imperial no nació de un momento único, sino de la confluencia de la Reconquista, la unión dinástica de Castilla y Aragón, y el impulso atlántico de finales del siglo XV.</p>
+
+  <p>La unión matrimonial entre Isabel I de Castilla y Fernando II de Aragón en 1469 creó la base política para lo que se convertiría en la primera potencia global moderna. Cuando los Reyes Católicos completaron la Reconquista con la toma de Granada en 1492 y ese mismo año Cristóbal Colón llegó al continente americano, se inauguró una era sin precedentes en la historia europea.</p>
+
+  <p>Es importante subrayar que el término "España" como entidad unificada era aún impreciso. Los reinos de Castilla y Aragón mantuvieron legislaciones, instituciones y culturas distintas durante décadas. Lo que emergió fue una monarquía compuesta que gobernaba territorios vastísimos con grados variables de autonomía.</p>
+
+  <div class="blockquote">
+    <p>La empresa de la conquista no fue obra del Estado sino de particulares que actuaban con autorización real, arriesgando sus propios capitales y vidas.</p>
+    <cite>— Interpretación historiográfica moderna</cite>
+  </div>
+
+  <div class="accordion" id="accordion-origenes">
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        La Reconquista y su legado ideológico
+        <span class="accordion-icon">+</span>
+      </div>
+      <div class="accordion-body">
+        <p>Los casi ocho siglos de conflicto entre reinos cristianos y musulmanes en la Península Ibérica (711–1492) forjaron una cultura guerrera, una fuerte identidad religiosa y una nobleza acostumbrada a ganar tierras por la espada. Este ethos fue transplantado al Nuevo Mundo por conquistadores que reproducían los modelos mentales de la Reconquista. La idea de "poblar y christianizar" las nuevas tierras tenía directos antecedentes en la expansión hacia el sur peninsular.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        El Tratado de Tordesillas (1494)
+        <span class="accordion-icon">+</span>
+      </div>
+      <div class="accordion-body">
+        <p>Apenas dos años después del primer viaje colombino, España y Portugal acordaron bajo mediación papal dividir el mundo no europeo conocido mediante una línea longitudinal a 370 leguas al oeste de Cabo Verde. Este tratado reflejaba la potencia diplomática ibérica pero también el carácter eurocentrado del orden mundial emergente: el resto de pueblos del planeta no fueron consultados sobre la repartición de sus propios territorios.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        Las Capitulaciones de Santa Fe
+        <span class="accordion-icon">+</span>
+      </div>
+      <div class="accordion-body">
+        <p>El acuerdo firmado entre Isabel I y Colón en abril de 1492 estableció el marco jurídico de la exploración. Colón recibiría el título de Almirante del Mar Océano, una décima parte de las riquezas encontradas y el cargo de gobernador de los territorios descubiertos. Este modelo contractual —el conquistador como empresario privado con patente real— se repetiría con variaciones a lo largo de toda la expansión.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRONOLOGÍA -->
+<div id="cronologia" style="background: linear-gradient(to bottom, var(--ink), rgba(26,18,8,0.97));">
+  <div class="timeline-wrapper">
+    <div class="section-label">II. Cronología</div>
+    <h2>Cuatro Siglos de <em>Historia</em></h2>
+    <p class="lead-text">Desde los primeros viajes colombinos hasta la guerra hispano-estadounidense, la trayectoria del Imperio abarcó fases de expansión, consolidación, crisis y declive.</p>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-tag tag-expansion">Expansión</div>
+          <h3>Llegada a América</h3>
+          <p>El 12 de octubre de 1492, Colón desembarca en el Caribe bajo bandera castellana. Se inicia el proceso de exploración y colonización de un continente desconocido para los europeos.</p>
+        </div>
+        <div class="timeline-node">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1492</div>
+        </div>
+        <div class="timeline-empty"></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-empty"></div>
+        <div class="timeline-node">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1519–1521</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-tag tag-expansion">Expansión</div>
+          <h3>Conquista de México</h3>
+          <p>Hernán Cortés, con 500 soldados y alianzas con pueblos indígenas oprimidos por los mexicas, derrumba el Imperio Azteca. Este evento transformó radicalmente el balance de poder en Mesoamérica.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-tag tag-expansion">Expansión</div>
+          <h3>Conquista del Perú</h3>
+          <p>Francisco Pizarro captura y ejecuta a Atahualpa, último soberano Inca, aprovechando la guerra civil interna del Tahuantinsuyo. El oro y la plata andinos financiarán la hegemonía española en Europa por décadas.</p>
+        </div>
+        <div class="timeline-node">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1532–1535</div>
+        </div>
+        <div class="timeline-empty"></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-empty"></div>
+        <div class="timeline-node">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1556–1598</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-tag tag-culture">Apogeo</div>
+          <h3>Reinado de Felipe II</h3>
+          <p>El "Rey Prudente" gobierna el mayor imperio del mundo. Bajo su reinado, España anexa Portugal (1580), alcanza Filipinas y sufre el desastre de la Armada Invencible (1588). Es también la época de El Escorial, Lope de Vega y El Greco.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-tag tag-culture">Siglo de Oro</div>
+          <h3>Apogeo Cultural</h3>
+          <p>Los siglos XVI y XVII producen una explosión creativa sin par: Cervantes, Quevedo, Calderón de la Barca, Velázquez, Zurbarán, Murillo. La literatura y el arte españoles dominan la escena europea mientras el Imperio financia la cultura con plata americana.</p>
+        </div>
+        <div class="timeline-node">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">s. XVI–XVII</div>
+        </div>
+        <div class="timeline-empty"></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-empty"></div>
+        <div class="timeline-node">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1648</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-tag tag-crisis">Crisis</div>
+          <h3>Paz de Westfalia</h3>
+          <p>El fin de la Guerra de los Treinta Años marca el inicio del declive español en Europa. España reconoce la independencia de los Países Bajos. El sistema westfaliano de Estados soberanos limita la hegemonía de los Habsburgo.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-tag tag-crisis">Transición</div>
+          <h3>Los Borbones llegan al trono</h3>
+          <p>Tras la Guerra de Sucesión Española, Felipe V inaugura la dinastía borbónica. Las reformas borbónicas del siglo XVIII modernizan la administración colonial pero también aumentan la presión fiscal sobre las colonias americanas, sembrando semillas de descontento.</p>
+        </div>
+        <div class="timeline-node">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1700–1759</div>
+        </div>
+        <div class="timeline-empty"></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-empty"></div>
+        <div class="timeline-node">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1808–1826</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-tag tag-decline">Disolución</div>
+          <h3>Independencias Americanas</h3>
+          <p>La invasión napoleónica de España en 1808 desestabiliza el orden colonial. Entre 1810 y 1826, casi todas las colonias continentales americanas —desde México hasta Argentina— logran la independencia. Bolívar, San Martín, Hidalgo y otros líderes encabezan este proceso.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-tag tag-decline">Fin del Imperio</div>
+          <h3>Guerra Hispano-Estadounidense</h3>
+          <p>En apenas cuatro meses, España pierde Cuba, Puerto Rico, Guam y Filipinas frente a Estados Unidos. El Tratado de París de 1898 marca el fin del Imperio colonial español. Los intelectuales de la "Generación del 98" reflexionan sobre el traumático "Desastre".</p>
+        </div>
+        <div class="timeline-node">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1898</div>
+        </div>
+        <div class="timeline-empty"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TERRITORIOS -->
+<div id="territorios">
+  <div class="territories-inner">
+    <div class="section-label">III. Geografía Imperial</div>
+    <h2>Un Imperio en <em>Cuatro Continentes</em></h2>
+    <p class="lead-text">En su máxima extensión, el Imperio Español abarcaba territorios en América, Europa, África, Asia y Oceanía — el primero en ser verdaderamente global.</p>
+
+    <div class="territories-grid">
+
+      <div class="territory-card" onclick="toggleTerritory(this)">
+        <div class="territory-icon">🌎</div>
+        <h3>América del Norte</h3>
+        <p>México, América Central, el Caribe y el suroeste de lo que hoy son Estados Unidos.</p>
+        <div class="territory-detail">Incluía el Virreinato de Nueva España (1535), que se extendía desde California hasta América Central. Las ciudades de México, Veracruz y Acapulco eran nodos clave del comercio transpacífico. La Capitanía General de Cuba controlaba el Caribe estratégico.</div>
+      </div>
+
+      <div class="territory-card" onclick="toggleTerritory(this)">
+        <div class="territory-icon">🌏</div>
+        <h3>América del Sur</h3>
+        <p>Virreinato del Perú y posteriormente del Río de la Plata, abarcando casi todo el continente.</p>
+        <div class="territory-detail">El Virreinato del Perú (1542) fue el más rico, con los yacimientos de plata de Potosí (actual Bolivia) que produjeron toneladas del metal precioso. Más tarde se crearon los virreinatos de Nueva Granada (1717) y Río de la Plata (1776) para mejorar la administración.</div>
+      </div>
+
+      <div class="territory-card" onclick="toggleTerritory(this)">
+        <div class="territory-icon">🗺️</div>
+        <h3>Europa</h3>
+        <p>Dominio sobre los Países Bajos, el sur de Italia, Cerdeña, Sicilia y partes de Francia.</p>
+        <div class="territory-detail">La herencia de Carlos I (V de Alemania) incluyó los Países Bajos, el Franco Condado, Nápoles, Sicilia y el Milanesado. Estos territorios eran costosos de mantener y fuente de conflictos permanentes. La rebelión holandesa (1568–1648) drenó enormes recursos.</div>
+      </div>
+
+      <div class="territory-card" onclick="toggleTerritory(this)">
+        <div class="territory-icon">🏝️</div>
+        <h3>Filipinas y el Pacífico</h3>
+        <p>Archipiélago asiático conquistado desde México en 1565, con presencia en las Molucas.</p>
+        <div class="territory-detail">Las Filipinas (nombradas por Felipe II) fueron administradas desde el Virreinato de Nueva España. El Galeón de Manila conectaba Acapulco con Manila anualmente, transportando plata americana a cambio de seda y porcelana china — uno de los primeros circuitos de comercio verdaderamente global.</div>
+      </div>
+
+      <div class="territory-card" onclick="toggleTerritory(this)">
+        <div class="territory-icon">🌍</div>
+        <h3>África</h3>
+        <p>Plazas fuertes en el norte de África (Orán, Ceuta, Melilla) y participación en el comercio esclavista.</p>
+        <div class="territory-detail">España mantuvo enclaves en el norte de África como defensa contra la piratería berberisca y proyección hacia el Mediterráneo. La corona española también otorgó el "asiento" — licencia para comerciar esclavos africanos hacia América — inicialmente a Portugal y luego a otras potencias, siendo el comercio esclavista atlántico uno de los aspectos más oscuros de la era colonial.</div>
+      </div>
+
+      <div class="territory-card" onclick="toggleTerritory(this)">
+        <div class="territory-icon">🇵🇹</div>
+        <h3>Unión Ibérica (1580–1640)</h3>
+        <p>Bajo Felipe II, Portugal y sus vastos territorios se unieron a la Corona española.</p>
+        <div class="territory-detail">Cuando Felipe II heredó el trono portugués (sin conquistarlo, por vía dinástica), el Imperio alcanzó su máxima extensión. El Imperio Portugués —con Brasil, Angola, Mozambique, Goa, Macao y más— se sumó temporalmente. Esta unión también hizo a España blanco de los enemigos de Portugal. En 1640, Portugal recuperó su independencia durante la crisis general del reinado de Felipe IV.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MONARCAS -->
+<section id="monarcas">
+  <div class="section-label">IV. Los Monarcas</div>
+  <h2>Reyes que <em>Gobernaron el Mundo</em></h2>
+  <p class="lead-text">Desde los Reyes Católicos hasta Alfonso XIII, el trono español produjo figuras de enorme variedad — reformadores, guerreros, mecenas y monarcas ineficaces.</p>
+
+  <div class="monarchs-grid">
+
+    <div class="monarch-card">
+      <div class="monarch-name">Isabel I y Fernando II</div>
+      <div class="monarch-title">Los Reyes Católicos</div>
+      <div class="monarch-dates">r. 1474/1479 – 1504/1516</div>
+      <p class="monarch-desc">Fundadores de la España imperial. Unificaron los reinos ibéricos principales, expulsaron a judíos y mudéjares (1492), establecieron la Inquisición (1478) y patrocinaron los viajes de Colón. Su legado es profundamente ambivalente: modernizadores y perseguidores simultáneamente.</p>
+    </div>
+
+    <div class="monarch-card">
+      <div class="monarch-name">Carlos I (V de Alemania)</div>
+      <div class="monarch-title">El Emperador</div>
+      <div class="monarch-dates">r. 1516 – 1556</div>
+      <p class="monarch-desc">Habsburgo flamenco que heredó España, los Países Bajos, Nápoles y el Imperio Romano-Germánico. Bajo su reinado se consumó la conquista de México y Perú. Luchó incansablemente contra protestantes y turcos otomanos. Abdicó agotado en 1556, dividiendo su herencia entre su hijo y su hermano.</p>
+    </div>
+
+    <div class="monarch-card">
+      <div class="monarch-name">Felipe II</div>
+      <div class="monarch-title">El Rey Prudente</div>
+      <div class="monarch-dates">r. 1556 – 1598</div>
+      <p class="monarch-desc">El monarca más poderoso de su época. Construyó El Escorial, gobernó desde el escritorio con obsesiva minuciosidad, ganó Lepanto (1571) y Filipinas, y perdió la Armada Invencible (1588) frente a Inglaterra. Representó el zénit y el inicio del declive español a la vez.</p>
+    </div>
+
+    <div class="monarch-card">
+      <div class="monarch-name">Felipe IV</div>
+      <div class="monarch-title">El Grande</div>
+      <div class="monarch-dates">r. 1621 – 1665</div>
+      <p class="monarch-desc">Gran mecenas de las artes —fue el rey de Velázquez, Calderón y Quevedo— pero gobernante mediocre dominado por el Conde-Duque de Olivares. Su reinado vio la pérdida de Portugal (1640), la rebelión catalana y el reconocimiento de los Países Bajos independientes (1648).</p>
+    </div>
+
+    <div class="monarch-card">
+      <div class="monarch-name">Carlos III</div>
+      <div class="monarch-title">El Mejor Alcalde de Madrid</div>
+      <div class="monarch-dates">r. 1759 – 1788</div>
+      <p class="monarch-desc">El más exitoso de los Borbones españoles. Impulsó las Reformas Borbónicas, modernizó la administración colonial, expulsó a los jesuitas (1767) y trató de reactivar la economía. Sus reformas —aunque bien intencionadas— también generaron resentimientos que contribuirían a las independencias americanas.</p>
+    </div>
+
+    <div class="monarch-card">
+      <div class="monarch-name">Carlos IV y Fernando VII</div>
+      <div class="monarch-title">El Ocaso Borbónico</div>
+      <div class="monarch-dates">r. 1788–1808 / 1808–1833</div>
+      <p class="monarch-desc">El período más caótico de la monarquía española. La invasión napoleónica, las Cortes de Cádiz y la Constitución de 1812, la restauración absolutista de Fernando VII y la pérdida de las colonias americanas se sucedieron en apenas 25 años, transformando España irreversiblemente.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- LEGADO -->
+<div class="full-section" id="legado">
+  <div class="full-section-inner">
+    <div class="section-label">V. Legado e Interpretaciones</div>
+    <h2>Un Legado <em>Complejo y Debatido</em></h2>
+    <p class="lead-text">El Imperio Español dejó huellas que aún estructuran el mundo del siglo XXI. Su evaluación histórica ha sido terreno de intensos debates ideológicos — la llamada "leyenda negra" y la "leyenda dorada" son dos extremos de un espectro que la historiografía rigurosa busca superar.</p>
+
+    <div class="debate-section">
+      <div class="debate-col positive">
+        <h3>✦ Aportes y Legados</h3>
+        <div class="debate-item">
+          <div class="debate-icon">🗣️</div>
+          <p>El español se convirtió en idioma de 500 millones de personas, segunda lengua materna del mundo. Una de las mayores herencias culturales de cualquier civilización.</p>
+        </div>
+        <div class="debate-item">
+          <div class="debate-icon">⚖️</div>
+          <p>España fue pionera en debatir los derechos de los pueblos colonizados. La Controversia de Valladolid (1550–1551) entre Las Casas y Sepúlveda fue el primer debate filosófico-jurídico sobre derechos humanos en la historia occidental.</p>
+        </div>
+        <div class="debate-item">
+          <div class="debate-icon">🏫</div>
+          <p>Se fundaron universidades en América décadas antes de que existieran en América del Norte anglosajona: la UNAM (1551) y la Universidad de Lima (1551) son las más antiguas del continente.</p>
+        </div>
+        <div class="debate-item">
+          <div class="debate-icon">🎨</div>
+          <p>El mestizaje cultural produjo formas artísticas únicas — el barroco americano, la música latinoamericana, las cocinas fusionadas — que enriquecieron la humanidad.</p>
+        </div>
+        <div class="debate-item">
+          <div class="debate-icon">🌐</div>
+          <p>Los exploradores españoles cartografiaron el mundo, conectaron por primera vez todos los continentes y sentaron las bases del comercio global moderno.</p>
+        </div>
+      </div>
+
+      <div class="debate-col negative">
+        <h3>✦ Violencias y Costos Humanos</h3>
+        <div class="debate-item">
+          <div class="debate-icon">💀</div>
+          <p>El colapso demográfico de los pueblos indígenas americanos fue catastrófico. Se estima que la población del continente cayó entre un 50% y 90% en el siglo XVI por enfermedades, guerra y trabajo forzado.</p>
+        </div>
+        <div class="debate-item">
+          <div class="debate-icon">⛓️</div>
+          <p>La esclavitud de africanos en las Américas fue institucionalizada y masiva. España participó activamente en el comercio transatlántico de esclavos, que desplazó forzadamente a millones de personas.</p>
+        </div>
+        <div class="debate-item">
+          <div class="debate-icon">🔥</div>
+          <p>La Inquisición española persiguió a judíos, musulmanes, protestantes y "conversos" sospechosos. Aunque su alcance fue menor de lo que la "leyenda negra" afirmaba, representó una violencia sistemática religiosa.</p>
+        </div>
+        <div class="debate-item">
+          <div class="debate-icon">📚</div>
+          <p>La destrucción de manuscritos, códices y conocimiento indígena fue enorme e irreparable. La quema de libros mayas por fray Diego de Landa es el ejemplo más conocido de este etnocidio cultural.</p>
+        </div>
+        <div class="debate-item">
+          <div class="debate-icon">⛏️</div>
+          <p>El sistema de la mita forzaba a poblaciones indígenas a trabajar en las minas de plata en condiciones devastadoras. Los yacimientos de Potosí cobraron cientos de miles de vidas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 4rem;">
+      <h3 style="font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 2rem;">La Historiografía: Más Allá de las Leyendas</h3>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            ¿Qué es la "Leyenda Negra"?
+            <span class="accordion-icon">+</span>
+          </div>
+          <div class="accordion-body">
+            <p>La Leyenda Negra es el conjunto de narrativas que representan al Imperio Español como excepcionalmente cruel, fanático e incivilizado. Fue elaborada principalmente por rivales de España —Inglaterra, los Países Bajos, más tarde Francia— como herramienta de propaganda geopolítica. Usaba hechos reales (violencias de la conquista, Inquisición) pero los descontextualizaba y exageraba, ignorando las violencias similares o peores de las propias potencias que la difundían. La historiografía seria rechaza tanto la Leyenda Negra como su opuesto.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            La perspectiva de los pueblos colonizados
+            <span class="accordion-icon">+</span>
+          </div>
+          <div class="accordion-body">
+            <p>Ningún análisis riguroso del Imperio puede ignorar la perspectiva de los pueblos indígenas americanos, africanos esclavizados y otras poblaciones colonizadas. Fuentes como la "Visión de los vencidos" (recopilada por Miguel León-Portilla), las cartas de caciques indígenas a la corona o los testimonios de africanos esclavizados ofrecen perspectivas radicalmente distintas de las crónicas oficiales españolas. La historia colonial es, fundamentalmente, una historia de encuentros violentos entre mundos muy desiguales en poder.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            El debate sobre la "hispanidad" hoy
+            <span class="accordion-icon">+</span>
+          </div>
+          <div class="accordion-body">
+            <p>El concepto de "hispanidad" —la comunidad cultural de los pueblos de habla hispana— ha sido objeto de debates intensos. Para algunos es un legado positivo de unidad y riqueza cultural compartida; para otros, una construcción ideológica que sublima las violencias coloniales y borra las identidades indígenas y afrodescendientes. En América Latina, el 12 de octubre se celebra de manera muy diversa: como "Día de la Raza", "Día de la Resistencia Indígena" o simplemente "Día del Encuentro". Estas distintas denominaciones reflejan las tensiones no resueltas del pasado colonial.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <div class="section-label">VI. Pon a Prueba tu Conocimiento</div>
+  <h2>Quiz <em>Histórico</em></h2>
+  <p class="lead-text">Diez preguntas para explorar qué tanto sabes sobre el Imperio Español.</p>
+
+  <div id="quiz-progress" class="quiz-progress"></div>
+
+  <div id="quiz-container">
+
+    <div class="quiz-question active" data-index="0">
+      <div class="quiz-q">¿En qué año se completó la Reconquista con la toma de Granada?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answer(this, false)">1469</button>
+        <button class="quiz-option" onclick="answer(this, true)">1492</button>
+        <button class="quiz-option" onclick="answer(this, false)">1512</button>
+        <button class="quiz-option" onclick="answer(this, false)">1480</button>
+      </div>
+      <div class="quiz-feedback">La Reconquista culminó el 2 de enero de 1492 cuando Boabdil, último sultán nazarí, entregó Granada a los Reyes Católicos. Ese mismo año, Colón llegó a América.</div>
+      <button class="quiz-btn" onclick="nextQuestion()">Siguiente pregunta →</button>
+    </div>
+
+    <div class="quiz-question" data-index="1">
+      <div class="quiz-q">¿Cuál era el metal precioso cuya exportación desde América financió el poder español en Europa?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answer(this, false)">Oro únicamente</button>
+        <button class="quiz-option" onclick="answer(this, true)">Plata, principalmente de Potosí</button>
+        <button class="quiz-option" onclick="answer(this, false)">Cobre y estaño</button>
+        <button class="quiz-option" onclick="answer(this, false)">Platino</button>
+      </div>
+      <div class="quiz-feedback">Las minas de plata de Potosí (en el actual Bolivia) y Zacatecas (México) fueron el motor económico del Imperio. Se estima que Potosí produjo alrededor de la mitad de toda la plata mundial entre 1545 y 1800.</div>
+      <button class="quiz-btn" onclick="nextQuestion()">Siguiente pregunta →</button>
+    </div>
+
+    <div class="quiz-question" data-index="2">
+      <div class="quiz-q">¿Qué fue la Controversia de Valladolid (1550-1551)?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answer(this, false)">Un debate sobre la sucesión al trono español</button>
+        <button class="quiz-option" onclick="answer(this, false)">Una negociación con el Imperio Otomano</button>
+        <button class="quiz-option" onclick="answer(this, true)">El primer debate formal sobre los derechos de los pueblos indígenas</button>
+        <button class="quiz-option" onclick="answer(this, false)">Un concilio eclesiástico sobre la Reforma Protestante</button>
+      </div>
+      <div class="quiz-feedback">Fray Bartolomé de las Casas y Juan Ginés de Sepúlveda debatieron ante una junta real si la conquista y el trato a los indígenas era justificable. Fue uno de los primeros debates sobre derechos humanos en la historia occidental, aunque sus conclusiones prácticas fueron limitadas.</div>
+      <button class="quiz-btn" onclick="nextQuestion()">Siguiente pregunta →</button>
+    </div>
+
+    <div class="quiz-question" data-index="3">
+      <div class="quiz-q">¿Qué evento precipitó las guerras de independencia latinoamericanas?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answer(this, false)">La muerte de Carlos III</button>
+        <button class="quiz-option" onclick="answer(this, true)">La invasión napoleónica de España en 1808</button>
+        <button class="quiz-option" onclick="answer(this, false)">La Revolución Francesa de 1789</button>
+        <button class="quiz-option" onclick="answer(this, false)">La pérdida de la Armada Invencible</button>
+      </div>
+      <div class="quiz-feedback">Cuando Napoleón depuso a los Borbones y colocó a su hermano José en el trono español, se produjo un vacío de legitimidad. Las élites coloniales americanas comenzaron a preguntarse: ¿a quién debemos lealtad? Esto fue el catalizador directo de los movimientos independentistas.</div>
+      <button class="quiz-btn" onclick="nextQuestion()">Siguiente pregunta →</button>
+    </div>
+
+    <div class="quiz-question" data-index="4">
+      <div class="quiz-q">¿Cuánto tiempo estuvo Portugal unido a la Corona española?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answer(this, false)">25 años (1555–1580)</button>
+        <button class="quiz-option" onclick="answer(this, true)">60 años (1580–1640)</button>
+        <button class="quiz-option" onclick="answer(this, false)">100 años (1540–1640)</button>
+        <button class="quiz-option" onclick="answer(this, false)">40 años (1600–1640)</button>
+      </div>
+      <div class="quiz-feedback">La Unión Ibérica duró de 1580 a 1640, cuando Portugal se rebeló en el contexto de la crisis general del reinado de Felipe IV. Los portugueses la denominaron "el período de la opresión castellana", aunque en la práctica Portugal mantuvo sus propias instituciones y colonias.</div>
+      <button class="quiz-btn" onclick="nextQuestion()">Siguiente pregunta →</button>
+    </div>
+
+    <div class="quiz-question" data-index="5">
+      <div class="quiz-q">¿Quién fue Bartolomé de las Casas?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answer(this, false)">El conquistador de Cuba</button>
+        <button class="quiz-option" onclick="answer(this, false)">El primer virrey de Nueva España</button>
+        <button class="quiz-option" onclick="answer(this, true)">Un fraile dominico defensor de los pueblos indígenas</button>
+        <button class="quiz-option" onclick="answer(this, false)">El navegante que circunnavegó el mundo</button>
+      </div>
+      <div class="quiz-feedback">Las Casas pasó de ser encomendero a convertirse en el mayor defensor de los indígenas ante la Corona española. Su obra "Brevísima relación de la destrucción de las Indias" (1542) fue enormemente influyente, aunque también fue explotada por enemigos de España como propaganda antiespañola.</div>
+      <button class="quiz-btn" onclick="nextQuestion()">Siguiente pregunta →</button>
+    </div>
+
+    <div class="quiz-question" data-index="6">
+      <div class="quiz-q">¿Cuál fue el principal resultado de la Batalla de Lepanto (1571)?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answer(this, false)">España conquistó el norte de África</button>
+        <button class="quiz-option" onclick="answer(this, true)">Se detuvo la expansión naval otomana en el Mediterráneo occidental</button>
+        <button class="quiz-option" onclick="answer(this, false)">España y el Papado firmaron un tratado definitivo</button>
+        <button class="quiz-option" onclick="answer(this, false)">Felipe II fue coronado emperador de Oriente</button>
+      </div>
+      <div class="quiz-feedback">La victoria de la Liga Santa (España, Venecia, Papado) sobre la flota otomana en Lepanto fue la mayor batalla naval del siglo XVI. Detuvo la expansión turca hacia el Mediterráneo occidental, aunque el Imperio Otomano reconstruyó su flota relativamente rápido. Miguel de Cervantes perdió el uso de su mano izquierda en esta batalla.</div>
+      <button class="quiz-btn" onclick="nextQuestion()">Siguiente pregunta →</button>
+    </div>
+
+    <div class="quiz-question" data-index="7">
+      <div class="quiz-q">¿Qué son las "Leyes Nuevas" de 1542?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answer(this, false)">Las normas de comercio con las colonias asiáticas</button>
+        <button class="quiz-option" onclick="answer(this, true)">Legislación que limitaba la esclavitud indígena y el sistema de encomiendas</button>
+        <button class="quiz-option" onclick="answer(this, false)">El código penal de las colonias americanas</button>
+        <button class="quiz-option" onclick="answer(this, false)">Las reglas para explorar nuevos territorios</button>
+      </div>
+      <div class="quiz-feedback">Impulsadas por las campañas de Las Casas, las Leyes Nuevas prohibían la esclavitud indígena y limitaban el sistema de encomiendas. Sin embargo, la resistencia de los colonos fue tan fuerte que muchas disposiciones nunca se aplicaron efectivamente, mostrando la brecha entre la legislación de Madrid y la realidad colonial.</div>
+      <button class="quiz-btn" onclick="nextQuestion()">Siguiente pregunta →</button>
+    </div>
+
+    <div class="quiz-question" data-index="8">
+      <div class="quiz-q">¿Cuál fue el año en que España perdió sus últimas colonias principales en Cuba, Puerto Rico y Filipinas?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answer(this, false)">1868</button>
+        <button class="quiz-option" onclick="answer(this, false)">1880</button>
+        <button class="quiz-option" onclick="answer(this, false)">1895</button>
+        <button class="quiz-option" onclick="answer(this, true)">1898</button>
+      </div>
+      <div class="quiz-feedback">El año 1898 es conocido en España como "el Desastre". Tras una breve guerra con Estados Unidos, España firmó el Tratado de París cediendo Cuba, Puerto Rico, Guam y Filipinas. Este evento traumatizó a la sociedad española y dio origen a la reflexión cultural de la "Generación del 98", con figuras como Unamuno, Machado y Azorín.</div>
+      <button class="quiz-btn" onclick="nextQuestion()">Siguiente pregunta →</button>
+    </div>
+
+    <div class="quiz-question" data-index="9">
+      <div class="quiz-q">¿Cuál de estas afirmaciones sobre el Galeón de Manila es correcta?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answer(this, false)">Transportaba especias desde la India a España directamente</button>
+        <button class="quiz-option" onclick="answer(this, false)">Era una flota militar para defender Filipinas de los chinos</button>
+        <button class="quiz-option" onclick="answer(this, true)">Conectaba Acapulco con Manila anualmente intercambiando plata americana por productos asiáticos</button>
+        <button class="quiz-option" onclick="answer(this, false)">Era el nombre del barco en que Magallanes completó la primera vuelta al mundo</button>
+      </div>
+      <div class="quiz-feedback">El Galeón de Manila (también llamado "La Nao de China") fue una de las primeras rutas comerciales transpacíficas regulares, operada entre 1565 y 1815. La plata potosina fluía hacia Asia mientras la seda, porcelana y especias chinas llegaban a América y Europa. Fue un ejemplo temprano de globalización económica.</div>
+      <button class="quiz-btn" onclick="nextQuestion()">Siguiente pregunta →</button>
+    </div>
+
+  </div>
+
+  <div class="quiz-score" id="quiz-score">
+    <div class="quiz-score-number" id="score-display">0/10</div>
+    <p id="score-message">Resultado</p>
+    <button class="quiz-btn visible" onclick="resetQuiz()" style="margin: 1.5rem auto 0; display: block;">Reiniciar Quiz</button>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">✦ PLUS ULTRA ✦</div>
+  <p>Lema del Imperio Español — "Más allá"</p>
+  <p style="margin-top: 1rem;">Este sitio es una síntesis educativa basada en historiografía académica contemporánea.</p>
+  <p>La historia del Imperio Español no admite simplificaciones —ni glorificación acrítica ni condena anacrónica.</p>
+</footer>
+
+<script>
+  // SCROLL ANIMATIONS
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+
+  // ACCORDION
+  function toggleAccordion(header) {
+    const item = header.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.accordion-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // TERRITORY CARDS
+  function toggleTerritory(card) {
+    const isActive = card.classList.contains('active');
+    document.querySelectorAll('.territory-card.active').forEach(c => c.classList.remove('active'));
+    if (!isActive) card.classList.add('active');
+  }
+
+  // QUIZ
+  let currentQ = 0;
+  let score = 0;
+  const totalQ = 10;
+
+  function initProgress() {
+    const prog = document.getElementById('quiz-progress');
+    prog.innerHTML = '';
+    for (let i = 0; i < totalQ; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'quiz-prog-dot' + (i === 0 ? ' active' : '');
+      dot.id = 'dot-' + i;
+      prog.appendChild(dot);
+    }
+  }
+
+  function answer(btn, correct) {
+    const q = btn.closest('.quiz-question');
+    const options = q.querySelectorAll('.quiz-option');
+    options.forEach(o => { o.disabled = true; });
+    const feedback = q.querySelector('.quiz-feedback');
+    const nextBtn = q.querySelector('.quiz-btn');
+
+    if (correct) {
+      btn.classList.add('correct');
+      score++;
+    } else {
+      btn.classList.add('incorrect');
+      options.forEach(o => {
+        if (o.getAttribute('onclick').includes('true')) o.classList.add('correct');
+      });
+    }
+
+    feedback.classList.add('visible');
+    nextBtn.classList.add('visible');
+
+    document.getElementById('dot-' + currentQ).classList.remove('active');
+    document.getElementById('dot-' + currentQ).classList.add('done');
+  }
+
+  function nextQuestion() {
+    currentQ++;
+    if (currentQ >= totalQ) {
+      showScore();
+      return;
+    }
+    document.querySelectorAll('.quiz-question').forEach((q, i) => {
+      q.classList.toggle('active', i === currentQ);
+    });
+    document.getElementById('dot-' + currentQ).classList.add('active');
+  }
+
+  function showScore() {
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('quiz-progress').style.display = 'none';
+    const scoreEl = document.getElementById('quiz-score');
+    scoreEl.classList.add('visible');
+    document.getElementById('score-display').textContent = score + '/10';
+    const msgs = [
+      [0, 3, 'Aún hay mucho Imperio por descubrir. ¡Sigue explorando!'],
+      [4, 5, 'Conocimiento básico. Las crónicas de Indias te esperan.'],
+      [6, 7, 'Buen dominio histórico. Podrías ser cronista de Indias.'],
+      [8, 9, 'Excelente. Tu conocimiento honra a Felipe II.'],
+      [10, 10, '¡Perfecto! Eres digno de la Real Academia de la Historia.']
+    ];
+    const msg = msgs.find(([min, max]) => score >= min && score <= max);
+    document.getElementById('score-message').textContent = msg ? msg[2] : '';
+  }
+
+  function resetQuiz() {
+    currentQ = 0;
+    score = 0;
+    document.querySelectorAll('.quiz-question').forEach((q, i) => {
+      q.classList.toggle('active', i === 0);
+      q.querySelectorAll('.quiz-option').forEach(o => {
+        o.disabled = false;
+        o.classList.remove('correct', 'incorrect');
+      });
+      q.querySelector('.quiz-feedback').classList.remove('visible');
+      q.querySelector('.quiz-btn').classList.remove('visible');
+    });
+    document.getElementById('quiz-container').style.display = 'block';
+    document.getElementById('quiz-progress').style.display = 'flex';
+    document.getElementById('quiz-score').classList.remove('visible');
+    initProgress();
+  }
+
+  // NAV SCROLL EFFECT
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.background = window.scrollY > 50
+      ? 'rgba(26,18,8,0.97)'
+      : 'rgba(26,18,8,0.92)';
+  });
+
+  // INIT
+  initProgress();
+</script>
+</body>
+</html>
